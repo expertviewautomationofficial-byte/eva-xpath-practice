@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XPath Practice Lab | EVA</title>
+<style>
+:root{--navy:#14213d;--blue:#2563eb;--teal:#0f766e;--ink:#182230;--muted:#667085;--line:#e4e7ec;--bg:#f4f7fb;--white:#fff;--orange:#f59e0b}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5}
+header{background:linear-gradient(120deg,#14213d,#1d4ed8);color:#fff;padding:24px max(20px,calc((100% - 1180px)/2))}
+header .tag{font-size:12px;letter-spacing:2px;font-weight:bold;color:#bfdbfe}
+header h1{margin:6px 0;font-size:30px}header p{margin:0;color:#dbeafe}
+.wrap{max-width:1180px;margin:22px auto;padding:0 18px}
+.notice{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:12px 15px;margin-bottom:18px;color:#1e3a8a}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:13px;padding:18px;box-shadow:0 2px 8px #1018280a}
+.card h2{font-size:18px;margin:0 0 5px;color:var(--navy)}
+.sub{font-size:13px;color:var(--muted);margin:0 0 15px}
+label{display:block;font-size:13px;font-weight:700;margin:10px 0 5px}
+input,select,textarea{width:100%;padding:10px 11px;border:1px solid #cfd4dc;border-radius:7px;font-size:14px;background:#fff}
+input[type=checkbox],input[type=radio]{width:auto;margin-right:7px}
+.inline{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0}
+.inline label{font-weight:400;margin:4px 0}
+button,.btn{border:0;border-radius:7px;padding:10px 14px;background:var(--blue);color:#fff;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block;font-size:13px}
+button.secondary{background:#e8eefc;color:#1d4ed8}button.success{background:var(--teal)}button.warning{background:#fff3d6;color:#92400e}
+button:hover,.btn:hover{filter:brightness(.95)}
+.row{display:flex;gap:10px;align-items:center}.row>*{flex:1}
+.search{display:flex;gap:8px}.search input{flex:1}
+.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.product{border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff}
+.product .emoji{font-size:34px;background:#f2f4f7;border-radius:8px;text-align:center;padding:12px}
+.product h3{font-size:15px;margin:9px 0 2px}.price{font-weight:bold;color:var(--teal)}
+small,.muted{color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}
+th{background:#f8fafc;color:#344054}
+.status{padding:3px 8px;border-radius:20px;font-size:11px;background:#dcfce7;color:#166534}
+footer{text-align:center;color:var(--muted);padding:25px;font-size:12px}
+.full{grid-column:1/-1}
+.task-list{columns:2;padding-left:20px;margin-bottom:0}.task-list li{break-inside:avoid;margin:0 0 9px;font-size:13px}
+#message{margin-top:10px;font-size:13px;color:var(--teal);font-weight:bold}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.products{grid-template-columns:1fr}.task-list{columns:1}header h1{font-size:24px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="tag">EXPERT VIEW AUTOMATION • QA TRAINING</div>
+  <h1>XPath Practice Lab</h1>
+  <p>One demo application. Many web elements. Endless XPath practice.</p>
+</header>
+
+<main class="wrap">
+  <div class="notice"><strong>Student instruction:</strong> Inspect the page using browser Developer Tools and write XPath locators for the requested elements. Do not use only IDs—practice text, attributes, contains(), starts-with(), axes, indexes and relationships.</div>
+
+  <div class="grid">
+    <section class="card">
+      <h2>1. Login Panel</h2>
+      <p class="sub">Practice: id, name, placeholder, type, value, parent-child</p>
+      <form id="loginForm">
+        <label for="loginEmail">Email Address</label>
+        <input id="loginEmail" name="email" type="email" placeholder="Enter your email" value="">
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" name="password" type="password" placeholder="Enter password">
+        <div class="inline">
+          <label><input type="checkbox" id="rememberMe" name="remember"> Remember me</label>
+          <label><input type="checkbox" id="showPassword"> Show password</label>
+        </div>
+        <button type="submit" id="loginButton">Login</button>
+        <button type="button" class="secondary" id="resetLogin">Reset</button>
+        <div id="loginMessage" role="status"></div>
+      </form>
+      <p><a href="#forgot" id="forgotPasswordLink">Forgot Password?</a> &nbsp; <a href="#register" class="register-link">Create an account</a></p>
+    </section>
+
+    <section class="card" id="registrationSection">
+      <h2>2. Registration Form</h2>
+      <p class="sub">Practice: labels, following-sibling, radio, checkbox, dropdown</p>
+      <form id="registrationForm">
+        <div class="row">
+          <div><label for="firstName">First Name</label><input id="firstName" name="firstName" placeholder="First name"></div>
+          <div><label for="lastName">Last Name</label><input id="lastName" name="lastName" placeholder="Last name"></div>
+        </div>
+        <label for="regEmail">Work Email</label>
+        <input id="regEmail" name="emailAddress" type="email" placeholder="name@example.com">
+        <label for="phoneNumber">Mobile Number</label>
+        <input id="phoneNumber" name="mobile" type="tel" placeholder="10-digit mobile number">
+        <label for="userRole">Select Role</label>
+        <select id="userRole" name="role">
+          <option value="">-- Select your role --</option>
+          <option value="student">Student</option>
+          <option value="tester">Manual Tester</option>
+          <option value="automation">Automation Tester</option>
+          <option value="trainer">Trainer</option>
+        </select>
+        <label>Experience Level</label>
+        <div class="inline">
+          <label><input type="radio" name="experience" value="fresher">Fresher</label>
+          <label><input type="radio" name="experience" value="1-2">1–2 Years</label>
+          <label><input type="radio" name="experience" value="3+">3+ Years</label>
+        </div>
+        <label><input type="checkbox" id="termsAccepted" name="terms"> I accept the terms and conditions</label>
+        <button type="submit" class="success" id="registerButton">Create Account</button>
+        <span id="registrationMessage" aria-live="polite"></span>
+      </form>
+    </section>
+
+    <section class="card full" id="productSection">
+      <h2>3. Products – Online Shopping</h2>
+      <p class="sub">Practice: dynamic-looking class names, contains(text), product card relationships, buttons inside cards</p>
+      <div class="search">
+        <input type="search" id="productSearch" placeholder="Search products..." aria-label="Search products">
+        <button type="button" id="searchButton">Search</button>
+      </div>
+      <br>
+      <div class="products" id="productList">
+        <article class="product product-card" data-product-id="P101">
+          <div class="emoji" aria-hidden="true">🎧</div>
+          <h3 class="product-title">Wireless Headphones</h3>
+          <p class="description">Noise reduction, 20-hour battery</p>
+          <p class="price">₹1,999</p>
+          <button class="addToCart" data-action="add" data-product="P101">Add to Cart</button>
+          <a href="#headphones" class="details-link">View Details</a>
+        </article>
+        <article class="product product-card" data-product-id="P102">
+          <div class="emoji" aria-hidden="true">⌚</div>
+          <h3 class="product-title">Smart Watch</h3>
+          <p class="description">Fitness tracking and notifications</p>
+          <p class="price">₹2,499</p>
+          <button class="addToCart" data-action="add" data-product="P102">Add to Cart</button>
+          <a href="#watch" class="details-link">View Details</a>
+        </article>
+        <article class="product product-card" data-product-id="P103">
+          <div class="emoji" aria-hidden="true">⌨️</div>
+          <h3 class="product-title">Mechanical Keyboard</h3>
+          <p class="description">RGB backlit keyboard</p>
+          <p class="price">₹3,299</p>
+          <button class="addToCart" data-action="add" data-product="P103">Add to Cart</button>
+          <a href="#keyboard" class="details-link">View Details</a>
+        </article>
+      </div>
+      <p id="cartSummary">Cart Items: <strong id="cartCount">0</strong></p>
+    </section>
+
+    <section class="card">
+      <h2>4. Employee Information</h2>
+      <p class="sub">Practice: table, rows, cells, indexes, axes, text matching</p>
+      <table id="employeeTable">
+        <thead><tr><th>Emp ID</th><th>Employee Name</th><th>Department</th><th>City</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>EMP101</td><td class="employee-name">Aarav Sharma</td><td>QA</td><td>Noida</td><td><span class="status">Active</span></td></tr>
+          <tr><td>EMP102</td><td class="employee-name">Priya Verma</td><td>Development</td><td>Delhi</td><td><span class="status">Active</span></td></tr>
+          <tr><td>EMP103</td><td class="employee-name">Rohan Singh</td><td>QA</td><td>Lucknow</td><td><span class="status">On Leave</span></td></tr>
+          <tr><td>EMP104</td><td class="employee-name">Neha Gupta</td><td>Support</td><td>Kanpur</td><td><span class="status">Active</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>5. Filters & Preferences</h2>
+      <p class="sub">Practice: multiple attributes, checkboxes, select options</p>
+      <label for="departmentFilter">Department</label>
+      <select id="departmentFilter" name="department">
+        <option value="all">All Departments</option>
+        <option value="qa">QA</option>
+        <option value="dev">Development</option>
+        <option value="support">Support</option>
+      </select>
+      <label for="cityFilter">Choose City</label>
+      <select id="cityFilter" name="city">
+        <option value="">Select City</option>
+        <option>Delhi</option><option>Noida</option><option>Kanpur</option><option>Lucknow</option>
+      </select>
+      <label>Notification Preferences</label>
+      <div class="inline">
+        <label><input type="checkbox" name="notification" value="email">Email</label>
+        <label><input type="checkbox" name="notification" value="sms">SMS</label>
+        <label><input type="checkbox" name="notification" value="whatsapp">WhatsApp</label>
+      </div>
+      <label for="feedback">Your Feedback</label>
+      <textarea id="feedback" name="feedback" rows="3" placeholder="Write your feedback here"></textarea>
+      <button type="button" id="savePreferences" class="secondary">Save Preferences</button>
+      <div id="preferenceMessage"></div>
+    </section>
+
+    <section class="card full">
+      <h2>6. XPath Challenge – Student Worksheet</h2>
+      <p class="sub">Write the XPath for each requirement. Trainer can ask students to execute each locator in DevTools Console.</p>
+      <ol class="task-list">
+        <li>Locate the Login button using its visible text.</li>
+        <li>Locate the password field using its name attribute.</li>
+        <li>Locate the Remember me checkbox.</li>
+        <li>Locate the input whose placeholder contains the word “email”.</li>
+        <li>Locate the Create Account button using its text.</li>
+        <li>Locate the dropdown option “Manual Tester”.</li>
+        <li>Locate all radio buttons having the same name.</li>
+        <li>Locate the product card with the title “Smart Watch”.</li>
+        <li>From “Wireless Headphones”, locate its Add to Cart button using an ancestor/parent relationship.</li>
+        <li>Locate the price belonging to “Mechanical Keyboard”.</li>
+        <li>Locate the employee row containing “Rohan Singh”.</li>
+        <li>From “Neha Gupta”, locate the city in the same table row.</li>
+        <li>Locate all table rows inside the employee table body.</li>
+        <li>Locate the link whose text is “Forgot Password?”.</li>
+        <li>Locate buttons whose class contains “addToCart”.</li>
+        <li>Locate all input elements on the page.</li>
+        <li>Locate the second product card using an index.</li>
+        <li>Locate the heading immediately inside the registration section.</li>
+        <li>Locate the “Kanpur” option in the city dropdown.</li>
+        <li>Locate the feedback textarea using its id.</li>
+      </ol>
+    </section>
+    <section class="card full">
+      <h2>7. Quick Interaction Area</h2>
+      <p class="sub">Use these controls to practise locating elements by text, attributes and relationships.</p>
+      <button type="button" id="primaryAction">Submit Request</button>
+      <button type="button" id="secondaryAction" class="secondary">Cancel Request</button>
+      <a href="https://www.example.com" id="externalExample" target="_blank" rel="noopener">Open Example Link</a>
+      <p id="actionMessage">No action performed yet.</p>
+    </section>
+  </div>
+</main>
+<footer>Expert View Automation • Manual Testing & XPath Practice Lab</footer>
+
+<script>
+let cartCount = 0;
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  document.getElementById('loginMessage').textContent = 'Demo login submitted. Validate the entered details.';
+});
+document.getElementById('resetLogin').addEventListener('click', function(){
+  document.getElementById('loginForm').reset();
+  document.getElementById('loginMessage').textContent = 'Login form has been reset.';
+});
+document.getElementById('showPassword').addEventListener('change', function(){
+  document.getElementById('loginPassword').type = this.checked ? 'text' : 'password';
+});
+document.getElementById('registrationForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  document.getElementById('registrationMessage').textContent = ' Demo registration submitted.';
+});
+document.querySelectorAll('.addToCart').forEach(function(button){
+  button.addEventListener('click', function(){
+    cartCount++;
+    document.getElementById('cartCount').textContent = cartCount;
+    this.textContent = 'Added';
+  });
+});
+document.getElementById('searchButton').addEventListener('click', function(){
+  const term = document.getElementById('productSearch').value.toLowerCase();
+  document.querySelectorAll('.product-card').forEach(function(card){
+    card.style.display = card.innerText.toLowerCase().includes(term) ? '' : 'none';
+  });
+});
+document.getElementById('savePreferences').addEventListener('click', function(){
+  document.getElementById('preferenceMessage').textContent = 'Preferences saved for this demo.';
+});
+document.getElementById('primaryAction').addEventListener('click', function(){
+  document.getElementById('actionMessage').textContent = 'Submit Request button was clicked.';
+});
+document.getElementById('secondaryAction').addEventListener('click', function(){
+  document.getElementById('actionMessage').textContent = 'Cancel Request button was clicked.';
+});
+</script>
+</body>
+</html>
